@@ -1,0 +1,20 @@
+.icon-group {
+  display:block;
+  text-align: center;
+  margin-top:25px;
+}
+
+.icon {
+  display: inline-block;
+  padding: 0 15px;
+  color: #74CCF9;
+  transition: ease 0.5s all;
+}
+
+.icon:hover {
+  color: #51B3F8;
+}
+
+.icon svg::after{
+  content: 'l';
+}

@@ -1,0 +1,13 @@
+.title {
+  padding-top: 10px;
+  text-align: center;
+  font-size: 1.5em;
+  color: #444;
+}
+
+
+@media only screen and (min-width: 600px)  {
+  .title {
+    padding-top: 30px;
+  }
+}
