@@ -1,5 +1,5 @@
 {
-  "name": "canvas-portfolio",
+  "name": "personal-website",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,33 +8,32 @@
     "start": "webpack-dev-server --open",
     "build": "NODE_ENV='production' webpack -p"
   },
-  "babel": {
-    "presets": [
-      "env",
-      "react"
-    ]
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.5",
-    "@fortawesome/fontawesome-free-brands": "^5.0.9",
-    "@fortawesome/fontawesome-free-solid": "^5.0.9",
+    "@fortawesome/fontawesome-free-brands": "^5.0.10",
     "@fortawesome/react-fontawesome": "0.0.18",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "konva": "^2.0.3",
+    "paper": "^0.11.5",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-konva": "^1.7.2",
+    "react-paper-bindings": "^1.0.3"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.1.0",
+    "immutable": "^3.8.2",
     "style-loader": "^0.20.3",
-    "webpack": "^4.4.1",
-    "webpack-cli": "^2.0.14",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^3.1.1"
   }
 }

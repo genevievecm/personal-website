@@ -10,6 +10,7 @@
     url('./fonts/TokyoRegular-Regular.otf') format('opentype'),
     url('./fonts/TokyoRegular-Regular.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'TokyoOutline';
   font-style: normal;

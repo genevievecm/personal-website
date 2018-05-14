@@ -1,4 +1,12 @@
-node_modules
-.vscode/
+# Assets
 app/fonts
+
+# Dependencies
+node_modules
+
+# Compiled
 dist
+
+# Config
+.vscode/
+config.yml

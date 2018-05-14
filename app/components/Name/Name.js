@@ -1,47 +1,37 @@
-var React = require('react');
+import React from 'react';
 import './Name.css';
 
 class Name extends React.Component {
 
+    constructor(){
+        super();
+    }
+
+    stringToArray = (string) => {
+        return string.split('');
+    }
+
+    getLetterWidths = (letters) => {
+        return letters.map(letter => {
+            letter.parentElement.style.width = `${letter.offsetWidth}px`;
+        });
+    }
+
     componentDidMount(){
         const spans = Array.prototype.slice.call(document.getElementsByTagName('span'));
         const storage = window.sessionStorage;
-        const widths = {};
 
-        window.addEventListener("resize", () => {
-            spans.map(span => {
-                setTimeout(() => {
-                    span.parentElement.style.width = `${span.offsetWidth}px`;
-                }, 500);
-            });
-        });
-
-        // use a promise to assign new height and width to letters
-        const getLetterWidth = new Promise((resolve, reject) => {
-            spans.map(span => {
-                const letter = span.parentElement.getAttribute('data-letter');
-                //if session hasn't started
-                if(!storage.getItem('sessionStarted')){
-                    setTimeout(() => {
-                        span.parentElement.style.width = `${span.offsetWidth}px`;
-                        //add letter widths to widths object
-                        widths[letter] = span.offsetWidth;
-                        //add widths object to session storage object
-                        storage.setItem('letterWidths', JSON.stringify(widths));
-                    }, 250);
-                } else {
-                    //get session storage object
-                    const storedWidth = JSON.parse(sessionStorage.getItem('letterWidths'));
-                    span.parentElement.style.width = `${storedWidth[letter]}px`;
-                }
-            });
-            resolve();
-        });
-
-        getLetterWidth.then(() => {
+        new Promise((resolve, reject) => {
+            // get widths of letters after font loads
+            setTimeout(() => {
+                this.getLetterWidths(spans);
+                resolve();
+            }, 250);
+        })
+        .then(() => {
             let time = 250;
             return spans.map((span) => {
-                //if session hasn't started
+                // if session hasn't started
                 if(!storage.getItem('sessionStarted')){
                     // then slide letters into view one at a time
                     time += 75;
@@ -49,30 +39,36 @@ class Name extends React.Component {
                         span.parentElement.style.top = '0px';
                     }, time);
                 }else{
-                    // no need to slide letters, just assign top position
+                    // otherwise assign top position, no slide in anim
                     span.parentElement.style.top = '0px';
                 }
             });
-        }).then(() =>{
+        })
+        .then(() => {
+            // save data to session storage
             storage.setItem('sessionStarted', true);
+        });
+
+        // reassign letters widths on window resize
+        window.addEventListener("resize", () => {
+            return this.getLetterWidths(spans);
         });
     }
 
     render() {
-        // this function turns a string into an array
-        function createLetterArray(string){
-            return string.split('');
-        }
-
         return (
             <div id="text" className="noselect">
-                {createLetterArray(this.props.text).map((letter, index) => {
+                {this.stringToArray(this.props.text).map((letter, index) => {
                     // check for spaces
                     if(letter === ' '){
-                        return <div key={`char${index}`} className="space"><span></span></div>;
+                        return (
+                            <div key={`char${index}`} className="space">
+                                <span></span>
+                            </div>
+                        );
                     } else {
                         return (
-                            <div key={`char${index}`} className="wrapper" data-letter={letter}>
+                            <div key={`char${index}`} className="wrapper">
                                 <span className="letter-1">{letter}</span>
                                 <span className="letter-2">{letter}</span>
                             </div>

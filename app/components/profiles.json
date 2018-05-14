@@ -1,0 +1,29 @@
+{
+  "profiles": [
+    {
+      "title": "is a developer",
+      "brush": "brush01",
+      "brushName": "sparkles"
+    },
+    {
+      "title": "is a creative",
+      "brush": "brush02",
+      "brushName": "sparkles"
+    },
+    {
+      "title": "is a corgi whisperer",
+      "brush": "brush03",
+      "brushName": "paw_print"
+    },
+    {
+      "title": "is a sweet tooth",
+      "brush": "brush04",
+      "brushName": "candy"
+    },
+    {
+      "title": "is an adventurer",
+      "brush": "brush05",
+      "brushName": "map_trail"
+    }
+  ]
+}
