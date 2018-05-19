@@ -1,6 +1,7 @@
 .icon-group {
   text-align: center;
   margin-top:25px;
+  z-index: 1;
 }
 
 .icon {

@@ -2,28 +2,18 @@
   "profiles": [
     {
       "title": "is a developer",
-      "brush": "brush01",
-      "brushName": "sparkles"
+      "brush": "sparkles",
+      "colours": ["#F7B94C", "#EBA846", "#DD9441", "#ECAD4B"]
     },
     {
-      "title": "is a creative",
-      "brush": "brush02",
-      "brushName": "sparkles"
-    },
-    {
-      "title": "is a corgi whisperer",
-      "brush": "brush03",
-      "brushName": "paw_print"
-    },
-    {
-      "title": "is a sweet tooth",
-      "brush": "brush04",
-      "brushName": "candy"
+      "title": "is a corgi lady",
+      "brush": "pawprints",
+      "colours": ["#E63855"]
     },
     {
       "title": "is an adventurer",
-      "brush": "brush05",
-      "brushName": "map_trail"
+      "brush": "trail",
+      "colours": ["purple"]
     }
   ]
 }
