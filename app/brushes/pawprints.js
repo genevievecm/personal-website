@@ -2,7 +2,7 @@ let counter = 0;
 
 export const pawprints = (ctx, coords, { scale, angle, opacity, colour}) => {
   counter++;
-  if(counter % 3 === 0){
+  if(counter % 2 === 0){
     ctx.save();
     ctx.translate(coords.x, coords.y);
 

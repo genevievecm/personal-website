@@ -12,7 +12,7 @@ var config = {
     filename: 'webpack.bundle.js',
     publicPath: '/'
   },
-  mode: 'development',
+  // mode: 'development',
   module: {
     rules: [
         { test: /\.(js)$/, use: 'babel-loader', exclude: /node_modules/ },
@@ -29,15 +29,15 @@ var config = {
 };
 
 // we're building for production
-// if(process.env.NODE_ENV === 'production'){
-//   config.plugins.push(
-//     new webpack.DefinePlugin({
-//       'process.env': {
-//         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-//       }
-//     }),
-//     new webpack.optimize.UglifyJsPlugin()
-//   )
-// }
+if(process.env.NODE_ENV === 'production'){
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    })
+  )
+  // config.optimization.minimize()
+}
 
 module.exports = config;
