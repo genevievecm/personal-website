@@ -7,8 +7,8 @@
   font-weight: 400;
   src:
     local('TokyoRegular'),
-    url('./fonts/TokyoRegular-Regular.otf') format('opentype'),
-    url('./fonts/TokyoRegular-Regular.ttf') format('truetype');
+    url('./assets/fonts/TokyoRegular-Regular.otf') format('opentype'),
+    url('./assets/fonts/TokyoRegular-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -17,8 +17,8 @@
   font-weight: 400;
   src:
     local('TokyoOutline'),
-    url('./fonts/TokyoOutline-Outline.otf') format('opentype'),
-    url('./fonts/TokyoOutline-Outline.ttf') format('truetype');
+    url('./assets/fonts/TokyoOutline-Outline.otf') format('opentype'),
+    url('./assets/fonts/TokyoOutline-Outline.ttf') format('truetype');
 }
 
 /* General */

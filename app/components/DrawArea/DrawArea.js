@@ -6,6 +6,8 @@ import { getRandomInt } from '../../utils/getRandomInt';
 // brushes
 import { sparkles } from '../../brushes/sparkles';
 import { pawprints } from '../../brushes/pawprints';
+import { creative } from '../../brushes/creative';
+import { teamPlayer } from '../../brushes/teamPlayer';
 
 // styles
 import './DrawArea.css';
@@ -37,7 +39,8 @@ class DrawArea extends React.Component {
     });
   }
 
-  draw = (brush, ctx, coords) => {
+  draw = (brush, ctx, points) => {
+    let coords = points[points.length - 1]
     switch(brush){
       case 'sparkles':
         sparkles(ctx, coords, {
@@ -51,9 +54,20 @@ class DrawArea extends React.Component {
         pawprints(ctx, coords, {
           scale: 0.5,
           angle: getRandomInt(0, 180),
-          colour: this.props.colours[0]
+          opacity: getRandomInt(0.5, 1),
+          colour: this.props.colours[getRandomInt(0, this.props.colours.length - 1)]
         });
       break;
+      case 'creative':
+        creative(ctx, coords, {
+          colour: this.props.colours[getRandomInt(0, this.props.colours.length - 1)]
+        });
+      break;
+      case 'teamPlayer':
+        teamPlayer(ctx, points, {
+          colour: this.props.colours
+        });
+      break
       default:
         return;
     }
@@ -89,7 +103,7 @@ class DrawArea extends React.Component {
           y: e.clientY,
         }],
       });
-      this.draw(this.props.brush, ctx, points[points.length - 1]);
+      this.draw(this.props.brush, ctx, points);
     }
   }
 

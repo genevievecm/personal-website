@@ -3,17 +3,22 @@
     {
       "title": "is a developer",
       "brush": "sparkles",
-      "colours": ["#F7B94C", "#EBA846", "#DD9441", "#ECAD4B"]
+      "colours" : ["#EBA846", "#F3BA50", "#DD9441"]
     },
     {
-      "title": "is a corgi lady",
+      "title": "is a creative thinker",
+      "brush": "creative",
+      "colours" : ["#372586", "#5B4AD0", "#EBA846", "#83D3F8", "#EA7689", "#ED823B", "#F5BB4D"]
+    },
+    {
+      "title": "is collaborative",
+      "brush": "teamPlayer",
+      "colours" : ["#372586", "#83D3F8", "#EA7689", "#ED823B", "#F5BB4D"]
+    },
+    {
+      "title": "is probably playing with her dog",
       "brush": "pawprints",
-      "colours": ["#E63855"]
-    },
-    {
-      "title": "is an adventurer",
-      "brush": "trail",
-      "colours": ["purple"]
+      "colours": ["#E53858"]
     }
   ]
 }

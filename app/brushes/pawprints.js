@@ -1,8 +1,8 @@
 let counter = 0;
 
-export const pawprints = (ctx, coords, { scale, angle, colour}) => {
+export const pawprints = (ctx, coords, { scale, angle, opacity, colour}) => {
   counter++;
-  if(counter % 4 === 0){
+  if(counter % 3 === 0){
     ctx.save();
     ctx.translate(coords.x, coords.y);
 
@@ -12,6 +12,7 @@ export const pawprints = (ctx, coords, { scale, angle, colour}) => {
     //Define the styles of the sparkle shape
     ctx.scale(scale, scale); // size
     ctx.rotate(Math.PI / 180 * angle); // rotation
+    ctx.globalAlpha = opacity; // opacity
     ctx.fillStyle = colour; // colour
 
     // pawprint shape

@@ -1,5 +1,3 @@
-import { getRandomInt } from '../utils/getRandomInt';
-
 export const sparkles = (ctx, coords, { scale, angle, opacity, colour}) => {
   ctx.save();
   ctx.translate(coords.x, coords.y);
