@@ -4,6 +4,7 @@ import fontawesome from '@fortawesome/fontawesome'
 import { faCodepen, faGithub, faLinkedin, faTwitter, faInstagram } from '@fortawesome/fontawesome-free-brands';
 
 // components
+import Tooltip from '../Tooltip/Tooltip';
 import Name from '../Name/Name';
 import Title from '../Title/Title';
 import Icon from '../Icon/Icon';
@@ -37,6 +38,9 @@ class App extends React.Component {
     render() {
         return (
             <div className="profile">
+                <Tooltip hide={false}>
+                    click and drag your mouse
+                </Tooltip>
                 <Name text="Genevieve Moreau" />
                 <Title title={this.state.title} />
                 <div className="icon-group">

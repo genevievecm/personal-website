@@ -3,8 +3,59 @@ import './Name.css';
 
 class Name extends React.Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        this.state = {
+            letters: [],
+        }
+    }
+
+    componentDidMount(){
+        const storage = window.sessionStorage;
+        const spans = Array.prototype.slice.call(document.getElementsByTagName('span'));
+
+        new Promise((resolve, reject) => {
+            // get widths of letters after giving font some time to load
+            setTimeout(() => resolve(this.getLetterWidths(spans)), 250);
+        }).then((widths) => {
+            this.setState({ letters: widths });
+            spans.map((span) => this.setLetterWidth(span));
+        }).then(() => {
+            let time = 250;
+            let opacity = 0;
+            return spans.map((span) => {
+                if(!storage.getItem('sessionStarted')){
+                    // slide letters into view one at a time
+                    time += 75;
+                    span.parentElement.style.top = '-900px'
+                    setTimeout(() => {
+                        span.parentElement.style.opacity = 1;
+                        span.parentElement.style.top = '0px'
+                    }, time);
+                } else {
+                    // fade in all letters
+                    opacity += 0.1;
+                    const fadein = setInterval(() => {
+                        span.parentElement.style.opacity = opacity;
+                        if(opacity === 1){
+                            clearInterval(fadein);
+                        }
+                    }, 250);
+                    span.parentElement.style.top = '0px';
+                }
+            });
+        }).then(() => {
+            // save data to session storage
+            storage.setItem('sessionStarted', true);
+        });
+
+        // listen for window resize
+        window.addEventListener("resize", () => {
+            // set new letter sizes in state
+            this.setState({ letters: this.getLetterWidths(spans) });
+            // apply letter sizes to letter elements
+            spans.map((span) => this.setLetterWidth(span));
+        });
     }
 
     stringToArray = (string) => {
@@ -12,47 +63,24 @@ class Name extends React.Component {
     }
 
     getLetterWidths = (letters) => {
-        return letters.map(letter => {
-            letter.parentElement.style.width = `${letter.offsetWidth}px`;
-        });
+        let letterObj = {};
+        let letterData = letters.map(letter => {
+            return letterObj = {
+                letter: letter.innerHTML.toUpperCase(),
+                width: letter.offsetWidth
+            };
+        }).filter((elem, index, self) => self.findIndex((t) => {
+            return (t.width > 0 && t.letter === elem.letter && t.width === elem.width)
+        }) === index);
+        return letterData;
     }
 
-    componentDidMount(){
-        const spans = Array.prototype.slice.call(document.getElementsByTagName('span'));
-        const storage = window.sessionStorage;
-
-        new Promise((resolve, reject) => {
-            // get widths of letters after font loads
-            setTimeout(() => {
-                this.getLetterWidths(spans);
-                resolve();
-            }, 250);
-        })
-        .then(() => {
-            let time = 250;
-            return spans.map((span) => {
-                // if session hasn't started
-                if(!storage.getItem('sessionStarted')){
-                    // then slide letters into view one at a time
-                    time += 75;
-                    setTimeout(() => {
-                        span.parentElement.style.top = '0px';
-                    }, time);
-                }else{
-                    // otherwise assign top position, no slide in anim
-                    span.parentElement.style.top = '0px';
-                }
-            });
-        })
-        .then(() => {
-            // save data to session storage
-            storage.setItem('sessionStarted', true);
-        });
-
-        // reassign letters widths on window resize
-        window.addEventListener("resize", () => {
-            return this.getLetterWidths(spans);
-        });
+    setLetterWidth = (elem) => {
+        const letter = elem.getAttribute('data-letter').toUpperCase();
+        const obj = this.state.letters.filter((o) => o.letter === letter)[0];
+        if(obj !== undefined){
+            return elem.parentElement.style.width = `${obj.width}px`;
+        }
     }
 
     render() {
@@ -63,14 +91,14 @@ class Name extends React.Component {
                     if(letter === ' '){
                         return (
                             <div key={`char${index}`} className="space">
-                                <span></span>
+                                <span data-letter="space"></span>
                             </div>
                         );
                     } else {
                         return (
                             <div key={`char${index}`} className="wrapper">
-                                <span className="letter-1">{letter}</span>
-                                <span className="letter-2">{letter}</span>
+                                <span className="letter-1" data-letter={letter}>{letter}</span>
+                                <span className="letter-2" data-letter={letter}>{letter}</span>
                             </div>
                         );
                     }

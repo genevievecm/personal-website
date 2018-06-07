@@ -9,7 +9,8 @@
 
 #text .wrapper {
     display: inline-block;
-    top: -900px;
+    opacity: 0;
+    /* top: -900px; */
     position: relative;
     height: 60px; /* default */
     width: 90px; /* default */
