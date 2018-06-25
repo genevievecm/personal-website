@@ -31,12 +31,18 @@ class DrawArea extends React.Component {
   componentDidMount() {
     const { canvas } = this.refs;
     const { viewport } = this.state;
+    const ctx = canvas.getContext('2d');
     canvas.style.width = `${viewport.width}px`;
     canvas.style.height = `${viewport.height}px`;
-    canvas.getContext('2d').scale(viewport.scale, viewport.scale);
+    this.scaleCanvas(ctx);
     this.setState({
-      canvas: canvas.getContext('2d'),
+      canvas: ctx,
     });
+  }
+
+  scaleCanvas = (ctx) => {
+    const { viewport } = this.state;
+    ctx.scale(viewport.scale, viewport.scale);
   }
 
   draw = (brush, ctx, points) => {
