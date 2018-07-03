@@ -12,7 +12,8 @@ const stroke = (ctx, points, colour) => {
 
   // ctx.lineWidth = 2;
   ctx.strokeStyle = colour;
-  ctx.lineJoin = ctx.lineCap = 'round';
+  ctx.lineJoin;
+  ctx.lineCap = 'round';
   ctx.beginPath();
 
   for (let i = 1; i < points.length; i++) {

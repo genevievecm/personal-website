@@ -86,7 +86,6 @@ class DrawArea extends React.Component {
   }
 
   handleMouseDown = (ctx) => (e) => {
-    const { colours } = this.props;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     this.setState({
       isDrawing: true,
@@ -103,6 +102,7 @@ class DrawArea extends React.Component {
   handleMouseMove = (ctx) => (e) => {
     const { points, isDrawing } = this.state;
     if(isDrawing){
+      this.props.hideTooltip(true);
       this.setState({
         points: [ ...points, {
           x: e.clientX,

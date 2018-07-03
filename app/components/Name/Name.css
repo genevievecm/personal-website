@@ -1,5 +1,5 @@
 #text {
-  font-size: 3.5em;
+  font-size: 6em;
   text-align: center;
 }
 
@@ -10,9 +10,8 @@
 #text .wrapper {
     display: inline-block;
     opacity: 0;
-    /* top: -900px; */
     position: relative;
-    height: 60px; /* default */
+    height: 80px; /* default */
     width: 90px; /* default */
     transition: ease 0.3s all;
 }
@@ -49,12 +48,12 @@
                                   supported by Chrome and Opera */
 }
 
-@media only screen and (min-width: 600px)  {
+@media only screen and (max-width: 600px)  {
   #text {
-    font-size: 6em;
+    font-size: 3.5em;
   }
 
   #text .wrapper {
-    height: 80px;
+    height: 40px;
   }
 }

@@ -23,7 +23,8 @@ class App extends React.Component {
         this.state = {
             title: profiles[0].title,
             brush: profiles[0].brush,
-            colours: profiles[0].colours
+            colours: profiles[0].colours,
+            isDrawing: false
         }
     }
 
@@ -35,13 +36,19 @@ class App extends React.Component {
         });
     }
 
+    handleTooltip = (bool) => {
+        this.setState({
+            isDrawing: bool
+        });
+    }
+
     render() {
         return (
             <div className="profile">
-                <Tooltip hide={false}>
+                <Tooltip hide={this.state.isDrawing}>
                     click and drag your mouse
                 </Tooltip>
-                <Name text="Genevieve Moreau" />
+                <Name text="Genevieve Moreau" isDrawing={this.state.isDrawing} />
                 <Title title={this.state.title} />
                 <div className="icon-group">
                     <Icon
@@ -66,6 +73,7 @@ class App extends React.Component {
                     />
                 </div>
                 <DrawArea
+                    hideTooltip={this.handleTooltip}
                     max={profiles.length - 1}
                     profile={this.handleProfileChange}
                     brush={this.state.brush}
