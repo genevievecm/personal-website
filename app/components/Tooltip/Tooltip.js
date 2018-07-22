@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Tooltip.css';
 
 export default class Tooltip extends Component {
@@ -13,7 +14,6 @@ export default class Tooltip extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.hide !== this.props.hide) {
-            console.log(this.props)
             this.setState({ display: 'fade' });
 
             //hide tooltip after fade out animation is complete
@@ -30,4 +30,8 @@ export default class Tooltip extends Component {
             </div>
         );
     }
+}
+
+Tooltip.propTypes = {
+    hide: PropTypes.bool,
 }

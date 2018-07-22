@@ -24,13 +24,15 @@
 }
 
 .wrapper .letter-2 {
-  font-family: 'TokyoOutline', sans-serif;
-  color: #5F59EE;
+  font-family: 'TokyoRegular', sans-serif;
+  color: #5B4FCD;
+  opacity: 1;
+  left: -5px;
 }
 
 .wrapper .letter-1 {
   font-family: 'TokyoRegular', sans-serif;
-  color: #AB81F3;
+  color: #97EFE9;
 }
 
 .space {

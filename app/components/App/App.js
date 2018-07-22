@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import fontawesome from '@fortawesome/fontawesome'
 import { faCodepen, faGithub, faLinkedin, faTwitter, faInstagram } from '@fortawesome/fontawesome-free-brands';
 
 // components
@@ -16,7 +14,7 @@ import { profiles } from '../profiles.json';
 // styles
 import './App.css';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
     constructor(props){
         super(props);
@@ -46,7 +44,7 @@ class App extends React.Component {
         return (
             <div className="profile">
                 <Tooltip hide={this.state.isDrawing}>
-                    click and drag your mouse
+                    click and drag your mouse ✨
                 </Tooltip>
                 <Name text="Genevieve Moreau" isDrawing={this.state.isDrawing} />
                 <Title title={this.state.title} />
@@ -69,7 +67,7 @@ class App extends React.Component {
                     />
                     <Icon
                         logo={faInstagram}
-                        url="https://www.instagram.com/_genevievem/"
+                        url="https://www.instagram.com/_genevievecm/"
                     />
                 </div>
                 <DrawArea
@@ -83,5 +81,3 @@ class App extends React.Component {
         )
     }
 }
-
-module.exports = App;

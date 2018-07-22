@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // util functions
 import { getRandomInt } from '../../utils/getRandomInt';
@@ -7,12 +8,12 @@ import { getRandomInt } from '../../utils/getRandomInt';
 import { sparkles } from '../../brushes/sparkles';
 import { pawprints } from '../../brushes/pawprints';
 import { creative } from '../../brushes/creative';
-import { teamPlayer } from '../../brushes/teamPlayer';
+import { collab } from '../../brushes/collab';
 
 // styles
 import './DrawArea.css';
 
-class DrawArea extends React.Component {
+export default class DrawArea extends React.Component {
 
   constructor() {
     super();
@@ -69,7 +70,7 @@ class DrawArea extends React.Component {
           colour: this.props.colours[getRandomInt(0, this.props.colours.length - 1)]
         });
       break;
-      case 'teamPlayer':
+      case 'collab':
         teamPlayer(ctx, points, {
           colour: this.props.colours
         });
@@ -135,4 +136,10 @@ class DrawArea extends React.Component {
   }
 }
 
-export default DrawArea;
+DrawArea.propTypes = {
+  hideTooltip: PropTypes.func,
+  profile: PropTypes.func,
+  brush: PropTypes.string,
+  colours: PropTypes.array,
+  max: PropTypes.number
+}
