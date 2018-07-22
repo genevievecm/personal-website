@@ -52,7 +52,6 @@ export default class Name extends React.Component {
 
         // listen for window resize
         window.addEventListener("resize", () => {
-            console.log('resize');
             // set new letter sizes in state
             this.setState({ letters: this.getLetterWidths(spans) });
             // apply letter sizes to letter elements

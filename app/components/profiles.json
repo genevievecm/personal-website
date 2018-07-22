@@ -12,7 +12,7 @@
     },
     {
       "title": "is a collaborator",
-      "brush": "teamPlayer",
+      "brush": "collab",
       "colours" : ["#83D3F8", "#D36135", "#D36135"]
     },
     {

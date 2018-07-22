@@ -8,7 +8,7 @@ export default class Tooltip extends Component {
         super(props);
         const storage = window.sessionStorage;
         this.state = {
-            display: !storage.getItem('hideTooltip') ? 'show' : 'hide'
+            display: !storage.getItem('sessionStarted') ? 'show' : 'hide'
         }
     }
 

@@ -71,7 +71,7 @@ export default class DrawArea extends React.Component {
         });
       break;
       case 'collab':
-        teamPlayer(ctx, points, {
+        collab(ctx, points, {
           colour: this.props.colours
         });
       break
