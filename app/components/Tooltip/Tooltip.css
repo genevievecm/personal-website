@@ -8,21 +8,6 @@
   right: 0;
   border-radius: 6px;
   text-align: center;
-  -webkit-transition: fadein 2s ease-in;
-  -moz-transition: fadein 2s ease-in;
-  -o-transition: fadein 2s ease-in;
-  -ms-transition: fadein 2s ease-in;
-  transition: fadein 2s ease-in;
-}
-
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-@-webkit-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
 }
 
 .slideup {
