@@ -37,6 +37,8 @@ jobs:
       - run: npm run test
 
   deploy:
+    machine:
+        enabled: true
     - run:
         name: Deploy to droplet
         command: |
