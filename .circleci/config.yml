@@ -36,9 +36,9 @@ jobs:
       # run tests!
       - run: npm run test
 
-deploy:
-      - run:
-          name: Deploy to droplet
-          command: |
-            echo 'deploying master branch'
-            ssh -v $USER@$IP_ADDRESS "cd ~/deploy; ./deploy.sh"
+  deploy:
+    - run:
+        name: Deploy to droplet
+        command: |
+          echo 'deploying master branch'
+          ssh -v $USER@$IP_ADDRESS "cd ~/deploy; ./deploy.sh"
