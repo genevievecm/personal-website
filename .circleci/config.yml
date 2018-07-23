@@ -36,9 +36,25 @@ jobs:
       # run tests!
       - run: npm run test
 
-deploy:
+  deploy:
+    machine:
+        enabled: true
+    steps:
       - run:
           name: Deploy to droplet
           command: |
             echo 'deploying master branch'
-            ssh -v $USER@$IP_ADDRESS "cd ~/deploy; ./deploy.sh"
+            ssh -v $USER@$IP_ADDRESS
+            ../deploy.sh
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
