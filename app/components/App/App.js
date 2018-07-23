@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import fontawesome from '@fortawesome/fontawesome'
 import { faCodepen, faGithub, faLinkedin, faTwitter, faInstagram } from '@fortawesome/fontawesome-free-brands';
 
 // components
@@ -16,14 +14,15 @@ import { profiles } from '../profiles.json';
 // styles
 import './App.css';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
             title: profiles[0].title,
             brush: profiles[0].brush,
-            colours: profiles[0].colours
+            colours: profiles[0].colours,
+            isDrawing: false
         }
     }
 
@@ -35,13 +34,19 @@ class App extends React.Component {
         });
     }
 
+    handleTooltip = (bool) => {
+        this.setState({
+            isDrawing: bool
+        });
+    }
+
     render() {
         return (
             <div className="profile">
-                <Tooltip hide={false}>
-                    click and drag your mouse
+                <Tooltip hide={this.state.isDrawing}>
+                    click and drag your mouse ✨
                 </Tooltip>
-                <Name text="Genevieve Moreau" />
+                <Name text="Genevieve Moreau" isDrawing={this.state.isDrawing} />
                 <Title title={this.state.title} />
                 <div className="icon-group">
                     <Icon
@@ -62,10 +67,11 @@ class App extends React.Component {
                     />
                     <Icon
                         logo={faInstagram}
-                        url="https://www.instagram.com/_genevievem/"
+                        url="https://www.instagram.com/_genevievecm/"
                     />
                 </div>
                 <DrawArea
+                    hideTooltip={this.handleTooltip}
                     max={profiles.length - 1}
                     profile={this.handleProfileChange}
                     brush={this.state.brush}
@@ -75,5 +81,3 @@ class App extends React.Component {
         )
     }
 }
-
-module.exports = App;

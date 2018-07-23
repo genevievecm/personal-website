@@ -1,24 +1,24 @@
 {
   "profiles": [
     {
-      "title": "is a developer",
+      "title": "is a Toronto based developer",
       "brush": "sparkles",
-      "colours" : ["#EBA846", "#F3BA50", "#DD9441"]
+      "colours" : ["#F0CF65"]
     },
     {
       "title": "is a creative thinker",
       "brush": "creative",
-      "colours" : ["#372586", "#5B4AD0", "#EBA846", "#83D3F8", "#EA7689", "#ED823B", "#F5BB4D"]
+      "colours" : ["#97EFE9", "#D36135", "#001419"]
     },
     {
-      "title": "is collaborative",
-      "brush": "teamPlayer",
-      "colours" : ["#372586", "#83D3F8", "#EA7689", "#ED823B", "#F5BB4D"]
+      "title": "is a collaborator",
+      "brush": "collab",
+      "colours" : ["#83D3F8", "#D36135", "#D36135"]
     },
     {
-      "title": "is probably playing with her dog",
+      "title": "is best friends with a corgi",
       "brush": "pawprints",
-      "colours": ["#E53858"]
+      "colours": ["#BDD1FA"]
     }
   ]
 }

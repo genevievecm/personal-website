@@ -1,9 +1,7 @@
-export const teamPlayer = (ctx, points, { colour }) => {
-  stroke(ctx, offsetPoints(points, -10), colour[0]);
-  stroke(ctx, offsetPoints(points, -5), colour[1]);
-  stroke(ctx, points, colour[2]);
-  stroke(ctx, offsetPoints(points, 5), colour[3]);
-  stroke(ctx, offsetPoints(points, 10), colour[4]);
+export const collab = (ctx, points, { colour }) => {
+  stroke(ctx, offsetPoints(points, -5), colour[0]);
+  stroke(ctx, points, colour[1]);
+  stroke(ctx, offsetPoints(points, 5), colour[2]);
 }
 
 const stroke = (ctx, points, colour) => {
@@ -12,7 +10,8 @@ const stroke = (ctx, points, colour) => {
 
   // ctx.lineWidth = 2;
   ctx.strokeStyle = colour;
-  ctx.lineJoin = ctx.lineCap = 'round';
+  ctx.lineJoin;
+  ctx.lineCap = 'round';
   ctx.beginPath();
 
   for (let i = 1; i < points.length; i++) {

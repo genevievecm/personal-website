@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Name.css';
 
-class Name extends React.Component {
+export default class Name extends React.Component {
 
     constructor(props){
         super(props);
@@ -108,4 +109,7 @@ class Name extends React.Component {
     }
 }
 
-module.exports = Name;
+Name.propTypes = {
+    text: PropTypes.string,
+    isDrawing: PropTypes.bool
+}

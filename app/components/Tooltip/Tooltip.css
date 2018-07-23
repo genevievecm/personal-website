@@ -1,26 +1,28 @@
 .tooltip {
-  font-size: 0.85em;
-  box-shadow: 2px 2px 8px #efefefef;
-  position: relative;
-  background: white;
-  padding: 10px;
-  top: -30px;
-  border-radius: 4px;
+  font-size: 0.95em;
+  position: absolute;
+  border: 1px solid #384949;
+  padding: 15px 23px 15px 25px;
+  margin: 20px;
+  top: 0;
+  right: 0;
+  border-radius: 6px;
   text-align: center;
+  -webkit-transition: fadein 2s ease-in;
+  -moz-transition: fadein 2s ease-in;
+  -o-transition: fadein 2s ease-in;
+  -ms-transition: fadein 2s ease-in;
+  transition: fadein 2s ease-in;
 }
 
-.tooltip:after {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 15px solid white;
-  position: absolute;
-  bottom: -15px;
-  margin: auto;
-  left: 0;
-  right: 0;
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .slideup {
@@ -98,12 +100,12 @@
 
 @keyframes fadeAway {
     0% {
-        top: -60px;
+        top: -20px;
         opacity: 1;
         display: block;
     }
     99% {
-        top: -120px;
+        top: -40px;
         opacity: 0;
     }
     100% {

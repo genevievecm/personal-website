@@ -9,3 +9,4 @@ dist
 
 # Config
 .vscode/
+server.sh

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono|Cousine|Ubuntu+Mono');
 
 /* Fonts For Name */
 @font-face {
@@ -23,10 +23,10 @@
 
 /* General */
 html, body {
-  background-color: #F1F0F6;
+  background-color: #FFF;
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: 'Fira Mono', monospace;
+  font-family: 'Ubuntu Mono', monospace;
 }

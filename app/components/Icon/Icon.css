@@ -7,12 +7,12 @@
 .icon {
   display: inline-block;
   padding: 0 15px;
-  color: #74CCF9;
+  color: #384949;
   transition: ease 0.5s all;
 }
 
 .icon:hover {
-  color: #51B3F8;
+  /* color: #51B3F8; */
   -webkit-animation: wiggle 0.5s ease;
   animation: wiggle 0.5s ease;
 }

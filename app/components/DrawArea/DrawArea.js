@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // util functions
 import { getRandomInt } from '../../utils/getRandomInt';
@@ -7,12 +8,12 @@ import { getRandomInt } from '../../utils/getRandomInt';
 import { sparkles } from '../../brushes/sparkles';
 import { pawprints } from '../../brushes/pawprints';
 import { creative } from '../../brushes/creative';
-import { teamPlayer } from '../../brushes/teamPlayer';
+import { collab } from '../../brushes/collab';
 
 // styles
 import './DrawArea.css';
 
-class DrawArea extends React.Component {
+export default class DrawArea extends React.Component {
 
   constructor() {
     super();
@@ -31,12 +32,18 @@ class DrawArea extends React.Component {
   componentDidMount() {
     const { canvas } = this.refs;
     const { viewport } = this.state;
+    const ctx = canvas.getContext('2d');
     canvas.style.width = `${viewport.width}px`;
     canvas.style.height = `${viewport.height}px`;
-    canvas.getContext('2d').scale(viewport.scale, viewport.scale);
+    this.scaleCanvas(ctx);
     this.setState({
-      canvas: canvas.getContext('2d'),
+      canvas: ctx,
     });
+  }
+
+  scaleCanvas = (ctx) => {
+    const { viewport } = this.state;
+    ctx.scale(viewport.scale, viewport.scale);
   }
 
   draw = (brush, ctx, points) => {
@@ -63,8 +70,8 @@ class DrawArea extends React.Component {
           colour: this.props.colours[getRandomInt(0, this.props.colours.length - 1)]
         });
       break;
-      case 'teamPlayer':
-        teamPlayer(ctx, points, {
+      case 'collab':
+        collab(ctx, points, {
           colour: this.props.colours
         });
       break
@@ -80,7 +87,6 @@ class DrawArea extends React.Component {
   }
 
   handleMouseDown = (ctx) => (e) => {
-    const { colours } = this.props;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     this.setState({
       isDrawing: true,
@@ -97,6 +103,7 @@ class DrawArea extends React.Component {
   handleMouseMove = (ctx) => (e) => {
     const { points, isDrawing } = this.state;
     if(isDrawing){
+      this.props.hideTooltip(true);
       this.setState({
         points: [ ...points, {
           x: e.clientX,
@@ -129,4 +136,10 @@ class DrawArea extends React.Component {
   }
 }
 
-export default DrawArea;
+DrawArea.propTypes = {
+  hideTooltip: PropTypes.func,
+  profile: PropTypes.func,
+  brush: PropTypes.string,
+  colours: PropTypes.array,
+  max: PropTypes.number
+}
