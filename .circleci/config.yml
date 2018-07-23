@@ -39,9 +39,22 @@ jobs:
   deploy:
     machine:
         enabled: true
-    - run:
-        name: Deploy to droplet
-        command: |
-          echo 'deploying master branch'
-          ssh -v $USER@$IP_ADDRESS
-          ../deploy.sh
+    steps:
+      - run:
+          name: Deploy to droplet
+          command: |
+            echo 'deploying master branch'
+            ssh -v $USER@$IP_ADDRESS
+            ../deploy.sh
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
