@@ -7,24 +7,35 @@ export default class Tooltip extends Component {
     constructor(props){
         super(props);
         this.state = {
-            display: sessionStorage.getItem('sessionStarted') ? 'hide' : 'show'
+            action: 'hide',
+            animation: ''
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.hide !== this.props.hide) {
-            this.setState({ display: 'fade' });
-
-            //hide tooltip after fade out animation is complete
+        // if name is done animating
+        if (prevProps.delay !== this.props.delay) {
             return setTimeout(() => {
-                this.setState({ display: 'hide' });
+                this.setState({
+                    action: 'show',
+                    animation: 'slidedown'
+                });
+            }, this.props.delay + 250)
+        }
+        // if mouse is drawing
+        if (prevProps.isDrawing !== this.props.isDrawing && this.state.action !== 'hide') {
+            this.setState({ animation: 'slideup' });
+
+            //hide tooltip after slideup animation is complete
+            return setTimeout(() => {
+                this.setState({ action: 'hide' });
             }, 700);
         }
     }
 
     render() {
         return (
-            <div className={`tooltip ${this.state.display}`}>
+            <div className={`tooltip ${this.state.action} ${this.state.animation}`}>
                 {this.props.children}
             </div>
         );
@@ -32,5 +43,6 @@ export default class Tooltip extends Component {
 }
 
 Tooltip.propTypes = {
-    hide: PropTypes.bool,
+    delay: PropTypes.number,
+    isDrawing: PropTypes.bool,
 }

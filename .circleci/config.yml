@@ -44,7 +44,7 @@ jobs:
           name: Deploy to droplet
           command: |
             echo 'deploying master branch'
-            ssh -v $USER@$IP_ADDRESS "cd /sites/deploy; ./deploy.sh"
+            ssh -v $USER@$IP_ADDRESS "cd /sites/scripts; ./deploy.sh"
 
 workflows:
   version: 2
