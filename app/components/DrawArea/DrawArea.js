@@ -47,14 +47,15 @@ export default class DrawArea extends React.Component {
   }
 
   draw = (brush, ctx, points) => {
-    let coords = points[points.length - 1]
+    const coords = points[points.length - 1];
+    const { colours } = this.props;
     switch(brush){
       case 'sparkles':
         sparkles(ctx, coords, {
           scale: getRandomInt(1, 25) / 10,
           angle: getRandomInt(0, 180),
           opacity: Math.random(),
-          colour: this.props.colours[getRandomInt(0, this.props.colours.length - 1)]
+          colour: colours[getRandomInt(0, colours.length - 1)]
         });
       break;
       case 'pawprints':
@@ -62,17 +63,17 @@ export default class DrawArea extends React.Component {
           scale: 0.5,
           angle: getRandomInt(0, 180),
           opacity: getRandomInt(0.5, 1),
-          colour: this.props.colours[getRandomInt(0, this.props.colours.length - 1)]
+          colour: colours[getRandomInt(0, colours.length - 1)]
         });
       break;
       case 'creative':
         creative(ctx, coords, {
-          colour: this.props.colours[getRandomInt(0, this.props.colours.length - 1)]
+          colour: colours[getRandomInt(0, colours.length - 1)]
         });
       break;
       case 'collab':
         collab(ctx, points, {
-          colour: this.props.colours
+          colour: colours
         });
       break
       default:
@@ -82,8 +83,8 @@ export default class DrawArea extends React.Component {
 
   getNextProfileIndex = () => {
     const { profileIndex } = this.state;
-    const { max } = this.props;
-    return (profileIndex >= max) ? 0 : profileIndex + 1;
+    const { totalProfiles } = this.props;
+    return (profileIndex >= totalProfiles) ? 0 : profileIndex + 1;
   }
 
   handleMouseDown = (ctx) => (e) => {
@@ -103,7 +104,7 @@ export default class DrawArea extends React.Component {
   handleMouseMove = (ctx) => (e) => {
     const { points, isDrawing } = this.state;
     if(isDrawing){
-      this.props.hideTooltip(true);
+      this.props.isDrawing(true);
       this.setState({
         points: [ ...points, {
           x: e.clientX,
@@ -124,7 +125,7 @@ export default class DrawArea extends React.Component {
     const { viewport, canvas } = this.state;
     return (
       <canvas
-        id="canvas"
+        id="canvas-of-profiles"
         ref="canvas"
         width={viewport.width * viewport.scale}
         height={viewport.height * viewport.scale}
@@ -137,9 +138,9 @@ export default class DrawArea extends React.Component {
 }
 
 DrawArea.propTypes = {
-  hideTooltip: PropTypes.func,
+  tooltip: PropTypes.func,
   profile: PropTypes.func,
   brush: PropTypes.string,
   colours: PropTypes.array,
-  max: PropTypes.number
+  totalProfiles: PropTypes.number
 }

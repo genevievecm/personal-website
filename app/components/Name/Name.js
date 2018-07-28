@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Name.css';
 
+// util functions
+import { stringToArray } from '../../utils/stringToArray';
+
 export default class Name extends React.Component {
 
     constructor(props){
@@ -12,7 +15,6 @@ export default class Name extends React.Component {
     }
 
     componentDidMount(){
-        const storage = window.sessionStorage;
         const spans = Array.prototype.slice.call(document.getElementsByTagName('span'));
 
         new Promise((resolve, reject) => {
@@ -23,9 +25,11 @@ export default class Name extends React.Component {
             spans.map((span) => this.setLetterWidth(span));
         }).then(() => {
             let time = 250;
+            const allTimes = [];
             let opacity = 0;
             return spans.map((span) => {
-                if(!storage.getItem('sessionStarted')){
+                allTimes.push(time);
+                if(!sessionStorage.getItem('sessionStarted')){
                     // slide letters into view one at a time
                     time += 75;
                     span.parentElement.style.top = '-900px'
@@ -33,6 +37,10 @@ export default class Name extends React.Component {
                         span.parentElement.style.opacity = 1;
                         span.parentElement.style.top = '0px'
                     }, time);
+                    // capture total animation time for name entrance
+                    if(spans.length === allTimes.length){
+                        this.props.animation(allTimes[spans.length - 1]);
+                    }
                 } else {
                     // fade in all letters
                     opacity += 0.1;
@@ -41,13 +49,10 @@ export default class Name extends React.Component {
                         if(opacity === 1){
                             clearInterval(fadein);
                         }
-                    }, 250);
+                    }, 150);
                     span.parentElement.style.top = '0px';
                 }
             });
-        }).then(() => {
-            // save data to session storage
-            storage.setItem('sessionStarted', true);
         });
 
         // listen for window resize
@@ -57,10 +62,6 @@ export default class Name extends React.Component {
             // apply letter sizes to letter elements
             spans.map((span) => this.setLetterWidth(span));
         });
-    }
-
-    stringToArray = (string) => {
-        return string.split('');
     }
 
     getLetterWidths = (letters) => {
@@ -87,7 +88,7 @@ export default class Name extends React.Component {
     render() {
         return (
             <div id="text" className="noselect">
-                {this.stringToArray(this.props.text).map((letter, index) => {
+                {stringToArray(this.props.text).map((letter, index) => {
                     // check for spaces
                     if(letter === ' '){
                         return (
@@ -111,5 +112,5 @@ export default class Name extends React.Component {
 
 Name.propTypes = {
     text: PropTypes.string,
-    isDrawing: PropTypes.bool
+    animation: PropTypes.func,
 }

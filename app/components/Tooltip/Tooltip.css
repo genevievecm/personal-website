@@ -1,13 +1,50 @@
 .tooltip {
   font-size: 0.95em;
   position: absolute;
+  display: block;
   border: 1px solid #384949;
   padding: 15px 23px 15px 25px;
   margin: 20px;
-  top: 0;
   right: 0;
   border-radius: 6px;
   text-align: center;
+}
+
+.slidedown {
+    animation-name: slideDown;
+    -webkit-animation-name: slideDown;
+
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+
+    visibility: visible !important;
+  }
+
+@keyframes slideDown {
+    0% {
+        top: -150;
+    }
+    40% {
+        top: 15px;
+    }
+    100% {
+        top: 0px;
+    }
+}
+
+@-webkit-keyframes slideDown {
+    0% {
+        top: -150;
+    }
+    30% {
+        top: -15px;
+    }
+    100% {
+        top: 0px;
+    }
 }
 
 .slideup {
@@ -23,94 +60,46 @@
   visibility: visible !important;
 }
 
-/* http://www.justinaguilar.com/animations/ */
 @keyframes slideUp {
     0% {
-        transform: translateY(100%);
+        top: 0;
     }
-    50% {
-        transform: translateY(-8%);
-    }
-    65% {
-        transform: translateY(4%);
-    }
-    80% {
-        transform: translateY(-4%);
-    }
-    95% {
-        transform: translateY(2%);
+    30% {
+        top: 10px;
     }
     100% {
-        transform: translateY(0%);
+        top: -200px;
     }
 }
 
 @-webkit-keyframes slideUp {
     0% {
-        -webkit-transform: translateY(100%);
+        top: 0;
     }
-    50% {
-        -webkit-transform: translateY(-8%);
-    }
-    65% {
-        -webkit-transform: translateY(4%);
-    }
-    80% {
-        -webkit-transform: translateY(-4%);
-    }
-    95% {
-        -webkit-transform: translateY(2%);
+    30% {
+        top: 10px;
     }
     100% {
-        -webkit-transform: translateY(0%);
+        top: -200px;
     }
+}
+
+.show {
+    display: block;
+    top: 0px;
 }
 
 .hide {
     display: none;
+    top: -200px;
 }
 
-.fade {
-    display: block;
-
-    animation-name: fadeAway;
-    -webkit-animation-name: fadeAway;
-
-    animation-duration: 0.75s;
-    -webkit-animation-duration: 0.75s;
-
-    animation-timing-function: ease;
-    -webkit-animation-timing-function: ease;
-}
-
-@keyframes fadeAway {
-    0% {
-        top: -20px;
-        opacity: 1;
-        display: block;
-    }
-    99% {
-        top: -40px;
-        opacity: 0;
-    }
-    100% {
+@media only screen and (max-width: 600px) {
+    .tooltip {
         display: none;
     }
-}
 
-@-webkit-keyframes fadeAway {
-    0% {
-        top: -60px;
-        opacity: 1;
-    }
-    100% {
-        top: -120px;
-        opacity: 0;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .tooltip {
-        /* top: -90px; */
+    .show {
+        display: none;
     }
 }

@@ -8,7 +8,7 @@ import Title from '../Title/Title';
 import Icon from '../Icon/Icon';
 import DrawArea from '../DrawArea/DrawArea';
 
-// static profile data
+// profile data
 import { profiles } from '../profiles.json';
 
 // styles
@@ -22,7 +22,15 @@ export default class App extends React.Component {
             title: profiles[0].title,
             brush: profiles[0].brush,
             colours: profiles[0].colours,
-            isDrawing: false
+            longestAnimationTime: 0,
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        // set local storage
+        if(prevState.longestAnimationTime !== this.state.longestAnimationTime){
+            const storage = window.sessionStorage;
+            storage.setItem('sessionStarted', true);
         }
     }
 
@@ -34,19 +42,30 @@ export default class App extends React.Component {
         });
     }
 
-    handleTooltip = (bool) => {
+    handleDrawing = (bool) => {
         this.setState({
             isDrawing: bool
+        });
+    }
+
+    handleLongestAnimationTime = (ms) => {
+        this.setState({
+            longestAnimationTime: ms
         });
     }
 
     render() {
         return (
             <div className="profile">
-                <Tooltip hide={this.state.isDrawing}>
-                    click and drag your mouse ✨
+                <Tooltip
+                    delay={this.state.longestAnimationTime}
+                    isDrawing={this.state.isDrawing}
+                >click and drag your mouse ✨
                 </Tooltip>
-                <Name text="Genevieve Moreau" isDrawing={this.state.isDrawing} />
+                <Name
+                    text="Genevieve Moreau"
+                    animation={this.handleLongestAnimationTime}
+                />
                 <Title title={this.state.title} />
                 <div className="icon-group">
                     <Icon
@@ -71,8 +90,8 @@ export default class App extends React.Component {
                     />
                 </div>
                 <DrawArea
-                    hideTooltip={this.handleTooltip}
-                    max={profiles.length - 1}
+                    isDrawing={this.handleDrawing}
+                    totalProfiles={profiles.length - 1}
                     profile={this.handleProfileChange}
                     brush={this.state.brush}
                     colours={this.state.colours}
