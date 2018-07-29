@@ -32,6 +32,11 @@ var config = {
 if(process.env.NODE_ENV === 'production'){
   var config = {
     entry: './dist/index.html',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'webpack.bundle.js',
+      publicPath: '/'
+    },
     mode: 'production',
     module: {
       rules: [
