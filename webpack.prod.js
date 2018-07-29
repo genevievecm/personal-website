@@ -16,7 +16,8 @@ if(process.env.NODE_ENV === 'production'){
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
-        template: 'app/index.html'
+        template: 'app/index.html',
+        favicon: 'app/favicon.ico'
       }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
