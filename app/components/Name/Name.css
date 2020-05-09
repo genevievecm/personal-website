@@ -1,61 +1,62 @@
-#text {
-  font-size: 6em;
-  text-align: center;
-}
-
-#text:hover {
-  cursor: default;
-}
-
-#text .wrapper {
-    display: inline-block;
-    opacity: 0;
+#name {
+    font-size: 6em;
+    text-align: center;
+    width: 100vw;
     position: relative;
-    height: 80px; /* default */
-    width: 90px; /* default */
-    transition: ease 0.3s all;
+}
+
+#name:hover {
+    cursor: default;
+}
+
+.letter {
+    height: 6vw;
+    padding: 0 2px;
+    position: relative;
+}
+
+.is_hidden {
+    top: -80vh;
+}
+
+.is_static {
+    top: 0;
+}
+
+.is_animated {
+    top: 0;
+    animation: slideIntoFrame 0.5s;
 }
 
 .wrapper span {
-  position: absolute;
-  top:-35px;
-  left:0;
-  transition: ease 0.3s all;
-}
-
-.wrapper .letter-2 {
-  font-family: 'TokyoRegular', sans-serif;
-  color: #5B4FCD;
-  opacity: 1;
-  left: -5px;
-}
-
-.wrapper .letter-1 {
-  font-family: 'TokyoRegular', sans-serif;
-  color: #97EFE9;
+    position: absolute;
+    top: -35px;
+    left: 0;
+    transition: ease 0.3s all;
 }
 
 .space {
-  display: block;
-  height:10px;
+    display: block;
+    height: 15px;
 }
 
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
-@media only screen and (max-width: 600px)  {
-  #text {
-    font-size: 3.5em;
-  }
-
-  #text .wrapper {
-    height: 40px;
-  }
+@keyframes slideIntoFrame {
+    0% {
+        top: -80vh;
+    }
+    50% {
+        top: 5vh;
+    }
+    100% {
+        top: 0;
+    }
 }

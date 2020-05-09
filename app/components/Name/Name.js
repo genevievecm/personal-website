@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Name.css';
+import SVG from '../SVG/SVG';
 
-// util functions
-import { stringToArray } from '../../utils/stringToArray';
+import './Name.css';
 
 export default class Name extends React.Component {
 
@@ -14,97 +13,47 @@ export default class Name extends React.Component {
         }
     }
 
+    animateLetters = () => {
+        let letterCount = 1;
+        const letterTotal = document.getElementsByClassName('letter').length;
+        const storage = window.sessionStorage;
+        const animateLetters = setInterval(() => {
+            // apply animation class to each letter
+            document.getElementById(`l${letterCount}`).classList.add('is_animated');
+            if (letterCount === letterTotal) {
+                clearInterval(animateLetters);
+                storage.setItem('sessionStarted', true);
+            }
+            letterCount++;
+        }, 100);
+    };
+
     componentDidMount(){
-        const spans = Array.prototype.slice.call(document.getElementsByTagName('span'));
-
-        new Promise((resolve, reject) => {
-            // get widths of letters after giving font some time to load
-            setTimeout(() => resolve(this.getLetterWidths(spans)), 250);
-        }).then((widths) => {
-            this.setState({ letters: widths });
-            spans.map((span) => this.setLetterWidth(span));
-        }).then(() => {
-            let time = 250;
-            const allTimes = [];
-            let opacity = 0;
-            return spans.map((span) => {
-                allTimes.push(time);
-                if(!sessionStorage.getItem('sessionStarted')){
-                    // slide letters into view one at a time
-                    time += 75;
-                    span.parentElement.style.top = '-900px'
-                    setTimeout(() => {
-                        span.parentElement.style.opacity = 1;
-                        span.parentElement.style.top = '0px'
-                    }, time);
-                    // capture total animation time for name entrance
-                    if(spans.length === allTimes.length){
-                        this.props.animation(allTimes[spans.length - 1]);
-                    }
-                } else {
-                    // fade in all letters
-                    opacity += 0.1;
-                    const fadein = setInterval(() => {
-                        span.parentElement.style.opacity = opacity;
-                        if(opacity === 1){
-                            clearInterval(fadein);
-                        }
-                    }, 150);
-                    span.parentElement.style.top = '0px';
-                }
-            });
-        });
-
-        // listen for window resize
-        window.addEventListener("resize", () => {
-            // set new letter sizes in state
-            this.setState({ letters: this.getLetterWidths(spans) });
-            // apply letter sizes to letter elements
-            spans.map((span) => this.setLetterWidth(span));
-        });
-    }
-
-    getLetterWidths = (letters) => {
-        let letterObj = {};
-        let letterData = letters.map(letter => {
-            return letterObj = {
-                letter: letter.innerHTML.toUpperCase(),
-                width: letter.offsetWidth
-            };
-        }).filter((elem, index, self) => self.findIndex((t) => {
-            return (t.width > 0 && t.letter === elem.letter && t.width === elem.width)
-        }) === index);
-        return letterData;
-    }
-
-    setLetterWidth = (elem) => {
-        const letter = elem.getAttribute('data-letter').toUpperCase();
-        const obj = this.state.letters.filter((o) => o.letter === letter)[0];
-        if(obj !== undefined){
-            return elem.parentElement.style.width = `${obj.width}px`;
+        // only animate if this is the first time visiting site
+        if (!sessionStorage.getItem('sessionStarted')) {
+            this.animateLetters();
         }
     }
 
     render() {
         return (
-            <div id="text" className="noselect">
-                {stringToArray(this.props.text).map((letter, index) => {
-                    // check for spaces
-                    if(letter === ' '){
-                        return (
-                            <div key={`char${index}`} className="space">
-                                <span data-letter="space"></span>
-                            </div>
-                        );
-                    } else {
-                        return (
-                            <div key={`char${index}`} className="wrapper">
-                                <span className="letter-1" data-letter={letter}>{letter}</span>
-                                <span className="letter-2" data-letter={letter}>{letter}</span>
-                            </div>
-                        );
-                    }
-                })}
+            <div id="name" className="noselect">
+                <SVG id="l1" letter="G" width="73" height="70" />
+                <SVG id="l2" letter="E" width="46" height="68" />
+                <SVG id="l3" letter="N" width="60" height="68" />
+                <SVG id="l4" letter="E" width="46" height="68" />
+                <SVG id="l5" letter="V" width="69" height="68" />
+                <SVG id="l6" letter="I" width="22" height="68" />
+                <SVG id="l7" letter="E" width="46" height="68" />
+                <SVG id="l8" letter="V" width="69" height="68" />
+                <SVG id="l9" letter="E" width="46" height="68" />
+                <span className="space"></span>
+                <SVG id="l10" letter="M" width="72" height="68" />
+                <SVG id="l11" letter="O" width="73" height="70" />
+                <SVG id="l12" letter="R" width="61" height="68" />
+                <SVG id="l13" letter="E" width="46" height="68" />
+                <SVG id="l14" letter="A" width="72" height="68" />
+                <SVG id="l15" letter="U" width="58" height="69" />
             </div>
         )
     }
