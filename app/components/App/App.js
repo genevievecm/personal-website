@@ -1,131 +1,129 @@
-import React from 'react';
-import {
-    faCodepen,
-    faGithub,
-    faLinkedin,
-    faTwitter
-} from '@fortawesome/fontawesome-free-brands';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+import { faCodepen, faGithub, faLinkedin, faTwitter, faMedium } from '@fortawesome/fontawesome-free-brands';
 
 // components
-import Tooltip from '../Tooltip/Tooltip';
-import Name from '../Name/Name';
-import Title from '../Title/Title';
-import Icon from '../Icon/Icon';
+// import Tooltip from '../Tooltip/Tooltip';
+
+import Profiles from '../../utils/Profiles';
+import Typography from '../../utils/Typography';
+import { Wiggle } from '../../utils/Animations';
+import { InlineList } from '../Lists/UnorderedLists';
+import { IconLink } from '../Link/IconLink';
+
 import DrawArea from '../DrawArea/DrawArea';
+import Headline from '../composites/Headline/Headline';
 
-// profile data
-import {
-    profiles
-} from '../profiles.json';
+const Profile = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+`;
 
-// styles
-import './App.css';
+const Subhead = styled.div`
+    font-size: 1.5rem;
+    padding-top: 25px;
+    text-align: center;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    user-select: none;
+`;
 
-export default class App extends React.Component {
+const AnimatedListItem = styled.li`
+    &:hover {
+        -webkit-animation: ${Wiggle} 0.5s ease;
+        animation: ${Wiggle} 0.5s ease;
+    }
+`;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: profiles[0].title,
-            brush: profiles[0].brush,
-            colours: profiles[0].colours,
-            longestAnimationTime: 0,
-        };
+const App = () => {
+
+    const [profileIndex, setProfileIndex] = useState(false);
+    const [isDrawing, setIsDrawing] = useState(false);
+    const [coordinates, setCoordinates] = useState([{ x: 0, y: 0 }]);
+
+    const profile = Profiles[!profileIndex ? 0 : profileIndex];
+
+    // componentDidUpdate(prevProps, prevState) {
+        // set local storage
+        // if (prevState.longestAnimationTime !== this.state.longestAnimationTime) {
+        //     const storage = window.sessionStorage;
+        //     storage.setItem('sessionStarted', true);
+        // }
+    // }
+
+    // handleLongestAnimationTime = (ms) => {
+    //     this.setState({
+    //         longestAnimationTime: ms
+    //     });
+    // };
+
+    function handleMouseDown(e) {
+        const totalProfiles = Profiles.length - 1;
+        const context = e.target.getContext('2d');
+
+        // resets canvas for every draw
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+
+        // assures that on the very first mousedown the profile doesn't change
+        if (typeof profileIndex !== 'number') {
+            setProfileIndex(0);
+        } else {
+            setProfileIndex(profileIndex < totalProfiles ? profileIndex + 1 : 0);
+        }
+
+        setIsDrawing(true);
+        setCoordinates([{ x: e.clientX, y: e.clientY }]);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        // set local storage
-        if (prevState.longestAnimationTime !== this.state.longestAnimationTime) {
-            const storage = window.sessionStorage;
-            storage.setItem('sessionStarted', true);
+    function handleMouseMove(e) {
+        if (isDrawing) {
+            setCoordinates([...coordinates, { x: e.clientX, y: e.clientY }]);
         }
     }
 
-    handleProfileChange = (index) => {
-        this.setState({
-            title: profiles[index].title,
-            brush: profiles[index].brush,
-            colours: profiles[index].colours
-        });
-    }
-
-    handleDrawing = (bool) => {
-        this.setState({
-            isDrawing: bool
-        });
-    };
-
-    handleLongestAnimationTime = (ms) => {
-        this.setState({
-            longestAnimationTime: ms
-        });
-    };
-
-    render() {
-        return ( <
-            div className = "profile" >
-            <
-            Tooltip delay = {
-                this.state.longestAnimationTime
-            }
-            isDrawing = {
-                this.state.isDrawing
-            } >
-            click and drag your mouse✨ <
-            /Tooltip> <
-            Name text = "Genevieve Moreau"
-            animation = {
-                this.handleLongestAnimationTime
-            }
-            /> <
-            Title title = {
-                this.state.title
-            }
-            /> <
-            div className = "icon-group" >
-            <
-            Icon logo = {
-                faCodepen
-            }
-            url = "https://codepen.io/genevievecm/" /
-            >
-            <
-            Icon logo = {
-                faGithub
-            }
-            url = "https://github.com/genevievecm" /
-            >
-            <
-            Icon logo = {
-                faLinkedin
-            }
-            url = "https://www.linkedin.com/in/genevievecm/" /
-            >
-            <
-            Icon logo = {
-                faTwitter
-            }
-            url = "https://twitter.com/gen_evieve" /
-            >
-            <
-            /div> <
-            DrawArea isDrawing = {
-                this.handleDrawing
-            }
-            totalProfiles = {
-                profiles.length - 1
-            }
-            profile = {
-                this.handleProfileChange
-            }
-            brush = {
-                this.state.brush
-            }
-            colours = {
-                this.state.colours
-            }
-            /> < /
-            div >
-        )
-    }
+    return (
+        <React.Fragment>
+            <Typography />
+            <Profile>
+                <Headline />
+                <Subhead>{ profile.title }</Subhead>
+                <InlineList>
+                    <AnimatedListItem>
+                        <IconLink icon={ faCodepen } url="https://codepen.io/genevievecm/" />
+                    </AnimatedListItem>
+                    <AnimatedListItem>
+                        <IconLink icon={ faGithub } url="https://github.com/genevievecm" />
+                    </AnimatedListItem>
+                    <AnimatedListItem>
+                        <IconLink icon={ faLinkedin } url="https://www.linkedin.com/in/genevievecm/" />
+                    </AnimatedListItem>
+                    <AnimatedListItem>
+                        <IconLink icon= { faTwitter } url="https://twitter.com/gen_evieve" />
+                    </AnimatedListItem>
+                    <AnimatedListItem>
+                        <IconLink icon= { faMedium } url="https://medium.com/@genthinks" />
+                    </AnimatedListItem>
+                </InlineList>
+            </Profile>
+            <DrawArea
+                width={ window.innerWidth * window.devicePixelRatio }
+                height={ window.innerHeight * window.devicePixelRatio }
+                brush={ profile.brush }
+                colours={ profile.colours }
+                coordinates={ coordinates }
+                onMouseMove={ handleMouseMove }
+                onMouseDown={ handleMouseDown }
+                onMouseUp={ () => setIsDrawing(false) }
+            />
+        </React.Fragment>
+    );
 }
+
+export default App;
+
+// <Tooltip delay={ this.state.longestAnimationTime } isDrawing = { this.state.isDrawing }>click and drag your mouse✨ </Tooltip>

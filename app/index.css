@@ -1,32 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono|Cousine|Ubuntu+Mono');
-
-/* Fonts For Name */
-@font-face {
-  font-family: 'TokyoRegular';
-  font-style: normal;
-  font-weight: 400;
-  src:
-    local('TokyoRegular'),
-    url('./assets/fonts/TokyoRegular-Regular.otf') format('opentype'),
-    url('./assets/fonts/TokyoRegular-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'TokyoOutline';
-  font-style: normal;
-  font-weight: 400;
-  src:
-    local('TokyoOutline'),
-    url('./assets/fonts/TokyoOutline-Outline.otf') format('opentype'),
-    url('./assets/fonts/TokyoOutline-Outline.ttf') format('truetype');
-}
-
-/* General */
-html, body {
-  background-color: #FFF;
+#app {
+  position: absolute;
   width: 100%;
   height: 100%;
-  padding: 0;
-  margin: 0;
-  font-family: 'Ubuntu Mono', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

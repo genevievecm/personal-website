@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SVG from '../SVG/SVG';
+import SVG from '../SvgLetter/SvgLetter';
 
 import './Name.css';
 
@@ -22,7 +22,7 @@ export default class Name extends React.Component {
             document.getElementById(`l${letterCount}`).classList.add('is_animated');
             if (letterCount === letterTotal) {
                 clearInterval(animateLetters);
-                storage.setItem('sessionStarted', true);
+                // storage.setItem('sessionStarted', true);
             }
             letterCount++;
         }, 100);
@@ -30,9 +30,9 @@ export default class Name extends React.Component {
 
     componentDidMount(){
         // only animate if this is the first time visiting site
-        if (!sessionStorage.getItem('sessionStarted')) {
+        // if (!sessionStorage.getItem('sessionStarted')) {
             this.animateLetters();
-        }
+        // }
     }
 
     render() {

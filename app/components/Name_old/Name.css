@@ -1,0 +1,31 @@
+.is_hidden {
+    top: -80vh;
+}
+
+.is_static {
+    top: 0;
+}
+
+.is_animated {
+    top: 0;
+    animation: slideIntoFrame 1s;
+}
+
+.wrapper span {
+    position: absolute;
+    top: -35px;
+    left: 0;
+    transition: ease 0.3s all;
+}
+
+@keyframes slideIntoFrame {
+    0% {
+        top: -80vh;
+    }
+    50% {
+        top: 5vh;
+    }
+    100% {
+        top: 0;
+    }
+}
